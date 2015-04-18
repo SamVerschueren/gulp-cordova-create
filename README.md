@@ -1,3 +1,3 @@
-# gulp-cordova-android
+# gulp-cordova-create
 
-> First step in creating an Android cordova project with gulp
+> First step in creating a cordova project with gulp

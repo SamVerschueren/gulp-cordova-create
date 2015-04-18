@@ -1,0 +1,28 @@
+{
+  "name": "gulp-cordova-create",
+  "version": "0.0.1",
+  "description": "First step in creating a cordova project with gulp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SamVerschueren/gulp-cordova-create.git"
+  },
+  "keywords": [
+    "gulp",
+    "cordova",
+    "create",
+    "build"
+  ],
+  "author": "Sam Verschueren",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SamVerschueren/gulp-cordova-create/issues"
+  },
+  "homepage": "https://github.com/SamVerschueren/gulp-cordova-create",
+  "dependencies": {
+    "cordova-lib": "^4.3.0"
+  }
+}
