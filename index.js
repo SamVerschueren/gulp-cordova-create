@@ -13,6 +13,7 @@ var path = require('path'),
     mkdirp = require('mkdirp'),
     through = require('through2'),
     gutil = require('gulp-util'),
+    Q = require('q'),
     cordovaLib = require('cordova-lib'),
     cordova = cordovaLib.cordova;
 
@@ -21,33 +22,29 @@ module.exports = function(options) {
     options = options || {};
 
     return through.obj(function(file, enc, cb) {
-
-        var self = this;
-
         if(!file.isDirectory()) {
             cb(new gutil.PluginError('gulp-cordova-create', 'You can only pass in a folder.'));
             return;
         }
 
-        var config = {
-            lib: {
-                www: {
-                    url: file.path
-                }
-            }
-        };
+        var self = this,
+            dir = '.cordova',
+            config = {lib: {www: {url: file.path}}};
 
-        mkdirp('.cordova', function() {
-            cordova.create('.cordova', options.id, options.name, config);
+        mkdirp(dir, function() {
+            Q.fcall(function() {
+                cordova.create(dir, options.id, options.name, config);
+            })
+            .then(function() {
+                self.push(new gutil.File({
+                    base: file.cwd,
+                    cwd: file.cwd,
+                    path: path.join(file.cwd, dir),
+                    stat: fs.statSync(path.join(file.cwd, dir))
+                }));
 
-            self.push(new gutil.File({
-                base: file.cwd,
-                cwd: file.cwd,
-                path: path.join(file.cwd, '.cordova'),
-                stat: fs.statSync(path.join(file.cwd, '.cordova'))
-            }));
-
-            cb();
+                cb();
+            });
         });
     });
 };
