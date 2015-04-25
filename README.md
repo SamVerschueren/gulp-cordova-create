@@ -27,7 +27,8 @@ provided in ```gulp.src``` for the contents of the ```www``` directory.
 
 ## Related
 
-See [`gulp-cordova-plugin`](https://github.com/SamVerschueren/gulp-cordova-plugin) for adding a plugin to your cordova project.
+- [`gulp-cordova-plugin`](https://github.com/SamVerschueren/gulp-cordova-plugin) for adding a plugin to your cordova project.
+- [`gulp-cordova-build-android`](https://github.com/SamVerschueren/gulp-cordova-build-android) for building the cordova project for the Android platform.
 
 ## Contributors
 
