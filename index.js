@@ -17,7 +17,7 @@ var path = require('path'),
 
 module.exports = function(options) {
 
-    options = options || {};
+    var firstFile;
 
     return through.obj(function(file, enc, cb) {
         if(!file.isDirectory()) {
@@ -28,9 +28,17 @@ module.exports = function(options) {
             return;
         }
 
+        if(firstFile === undefined) {
+            firstFile = file;
+        }
+
+        cb();
+    }, function(cb) {
         var self = this,
             dir = '.cordova',
-            config = {lib: {www: {url: file.path}}};
+            config = {lib: {www: {url: firstFile.path}}};
+
+        options = options || {};
 
         // Make sure the first make the directory recursively
         mkdirp(dir, function() {
@@ -38,10 +46,10 @@ module.exports = function(options) {
             cordova.create(dir, options.id, options.name, config).then(function() {
                 // Pass in the cordova project directory to the next step
                 self.push(new gutil.File({
-                    base: file.cwd,
-                    cwd: file.cwd,
-                    path: path.join(file.cwd, dir),
-                    stat: fs.statSync(path.join(file.cwd, dir))
+                    base: firstFile.cwd,
+                    cwd: firstFile.cwd,
+                    path: path.join(firstFile.cwd, dir),
+                    stat: fs.statSync(path.join(firstFile.cwd, dir))
                 }));
 
                 // Continue
