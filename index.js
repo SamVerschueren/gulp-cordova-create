@@ -40,7 +40,7 @@ module.exports = function(options) {
 
         options = options || {};
 
-        // Make sure the first make the directory recursively
+        // Make sure the directory exists
         mkdirp(dir, function() {
             // Create the cordova project in the correct directory
             cordova.create(dir, options.id, options.name, config).then(function() {
