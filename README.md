@@ -1,14 +1,12 @@
 # gulp-cordova-create
 
-> First step in creating a cordova project with gulp
+> Create a cordova project
 
 ## Installation
 
 ```bash
 npm install --save-dev gulp-cordova-create
 ```
-
-**Not yet available**
 
 ## Usage
 
@@ -43,6 +41,7 @@ gulp.task('build', function() {
     return gulp.src('dist')
         .pipe(create(options));
 });
+```
 
 This will execute the following command
 
