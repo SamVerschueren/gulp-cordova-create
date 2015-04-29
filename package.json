@@ -1,7 +1,7 @@
 {
   "name": "gulp-cordova-create",
-  "version": "0.0.1",
-  "description": "First step in creating a cordova project with gulp",
+  "version": "1.0.0",
+  "description": "Create a cordova project",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +12,7 @@
   },
   "keywords": [
     "gulp",
+    "gulpjs",
     "cordova",
     "create",
     "build"
