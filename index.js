@@ -34,11 +34,11 @@ module.exports = function(options) {
 
         cb();
     }, function(cb) {
-        var self = this,
-            dir = '.cordova',
-            config = {lib: {www: {url: firstFile.path}}};
-
         options = options || {};
+
+        var self = this,
+            dir = options.dir || '.cordova',
+            config = {lib: {www: {url: firstFile.path}}};
 
         // Make sure the directory exists
         mkdirp(dir, function() {
