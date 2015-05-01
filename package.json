@@ -1,6 +1,6 @@
 {
   "name": "gulp-cordova-create",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Create a cordova project",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,8 @@
     "gulpjs",
     "cordova",
     "create",
-    "build"
+    "build",
+    "gulp-cordova"
   ],
   "author": {
     "name": "Sam Verschueren",

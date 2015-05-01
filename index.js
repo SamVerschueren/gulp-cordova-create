@@ -54,7 +54,7 @@ module.exports = function(options) {
 
                 // Continue
                 cb();
-            });
+            }).catch(cb);
         });
     });
 };
