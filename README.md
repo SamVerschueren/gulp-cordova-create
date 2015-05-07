@@ -33,7 +33,7 @@ var gulp = require('gulp'),
 
 gulp.task('build', function() {
     var options = {
-        directory: 'myproject',
+        dir: 'myproject',
         id: 'com.myproject.hello',
         name: 'MyProject'
     };
@@ -50,6 +50,33 @@ $ cordova create myproject com.myproject.hello MyProject
 ```
 
 And then it will copy the content of the ```dist``` directory to the ```www``` directory of the cordova project.
+
+## API
+
+### create([options])
+
+#### options
+
+##### dir
+
+Type: `string`  
+Default: `.cordova`
+
+The name of the output directory.
+
+##### id
+
+Type: `string`  
+Default: `io.cordova.hellocordova`
+
+The reverse domain-style identifier of the project.
+
+##### name
+
+Type: `string`  
+Default: `HelloCordova`
+
+The application's display title.
 
 ## Related
 
