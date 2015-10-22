@@ -28,6 +28,8 @@ module.exports = function (options) {
 		}
 
 		if (firstFile === undefined) {
+			firstFile = file;
+
 			options = options || {};
 
 			var self = this;
