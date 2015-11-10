@@ -28,10 +28,10 @@
   },
   "homepage": "https://github.com/SamVerschueren/gulp-cordova-create",
   "dependencies": {
-    "cordova-lib": "^4.3.0",
-    "gulp-util": "^3.0.4",
-    "mkdirp": "^0.5.0",
-    "through2": "^0.6.5"
+    "cordova-lib": "^5.4.0",
+    "gulp-util": "^3.0.7",
+    "mkdirp": "^0.5.1",
+    "through2": "^2.0.0"
   },
   "devDependencies": {
     "xo": "*"
