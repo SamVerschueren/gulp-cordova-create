@@ -4,34 +4,32 @@
 
 ## Installation
 
-```bash
+```
 npm install --save-dev gulp-cordova-create
 ```
 
 ## Usage
 
-```JavaScript
-var gulp = require('gulp'),
-    create = require('gulp-cordova-create');
+```js
+var create = require('gulp-cordova-create');
 
-gulp.task('build', function() {
+gulp.task('build', function () {
     return gulp.src('dist')
         .pipe(create());
 });
 ```
 
-This will generate a Cordova project in the ```.cordova``` directory. It will copy the contents of the ```dist``` directory
-to the ```www``` directory of the cordova project.
+This will generate a Cordova project in the `.cordova` directory. It will copy the contents of the `dist` directory
+to the `www` directory of the cordova project.
 
 ### Options
 
 You can pass in extra options to change the initial configuration of the project.
 
-```JavaScript
-var gulp = require('gulp'),
-    create = require('gulp-cordova-create');
+```js
+var create = require('gulp-cordova-create');
 
-gulp.task('build', function() {
+gulp.task('build', function () {
     var options = {
         dir: 'myproject',
         id: 'com.myproject.hello',
@@ -45,11 +43,11 @@ gulp.task('build', function() {
 
 This will execute the following command
 
-```bash
+```
 $ cordova create myproject com.myproject.hello MyProject
 ```
 
-And then it will copy the content of the ```dist``` directory to the ```www``` directory of the cordova project.
+And then it will copy the content of the `dist` directory to the `www` directory of the cordova project.
 
 ## API
 
@@ -81,10 +79,6 @@ The application's display title.
 ## Related
 
 See [`gulp-cordova`](https://github.com/SamVerschueren/gulp-cordova) for the full list of available packages.
-
-## Contributors
-
-- Sam Verschueren [<sam.verschueren@gmail.com>]
 
 ## License
 
