@@ -79,6 +79,15 @@ Default: `HelloCordova`
 
 The application's display title.
 
+##### buildConfig
+
+Type: `object`<br>
+Default: `undefined`
+
+Content to include in the cordova `build.json`. <br>
+See `Using build.json` section of cordova documentation for posible configurations.
+
+
 
 ## Related
 

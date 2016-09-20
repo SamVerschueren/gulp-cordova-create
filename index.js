@@ -14,6 +14,8 @@ var mkdirp = require('mkdirp');
 var through = require('through2');
 var gutil = require('gulp-util');
 var cordova = require('cordova-lib').cordova.raw;
+var Q = require('q');
+var extend = require('extend');
 
 module.exports = function (options) {
 	var firstFile;
@@ -35,24 +37,60 @@ module.exports = function (options) {
 			var self = this;
 			var dir = options.dir || '.cordova';
 			var config = {lib: {www: {url: firstFile.path}}};
+			var buildJsonPath = dir  + path.sep + 'build.json';
 
-			// Make sure the directory exists
-			mkdirp(dir, function () {
-				// Create the cordova project in the correct directory
-				cordova.create(dir, options.id, options.name, config).then(function () {
-					// Pass in the cordova project directory to the next step
-					self.push(new gutil.File({
-						base: firstFile.cwd,
-						cwd: firstFile.cwd,
-						path: path.join(firstFile.cwd, dir),
-						stat: fs.statSync(path.join(firstFile.cwd, dir))
-					}));
-
-					// Continue
-					cb();
-				}).catch(function (err) {
-					cb(new gutil.PluginError('gulp-cordova-create', err.message));
+			/**
+			 * Returns a promise to update the build config
+			 */
+			function buildConfig(){
+				return Q.fcall(function(){
+					return fs.existsSync(buildJsonPath);
+				})
+				// Get the current contents of build.json
+				.then(function(exists){
+					if (exists){
+						return JSON.parse(fs.readFileSync(buildJsonPath));
+					}
+					return {};
+				})
+				// Replace / Merge config with specified config
+				.then(function(buildConfig){
+					return extend(true, buildConfig, options.buildConfig);
+				})
+				// Save the new config
+				.then(function(buildConfig){
+					return fs.writeFileSync(buildJsonPath, JSON.stringify(buildConfig, null, '  '));
 				});
+			}
+
+			Q.fcall(function(){
+				return mkdirp.sync(dir);
+			})
+			// Create the cordova project
+			.then(function(){
+				return cordova.create(dir, options.id, options.name, config);
+			})
+			.then(function(){
+				// Pass in the cordova project directory to the next step
+				self.push(new gutil.File({
+					base: firstFile.cwd,
+					cwd: firstFile.cwd,
+					path: path.join(firstFile.cwd, dir),
+					stat: fs.statSync(path.join(firstFile.cwd, dir))
+				}));
+			})
+			// Decide if we need to create/update a build.json file
+			.then(function(){
+				if(options.buildConfig != null){
+					return buildConfig();
+				}
+			})
+			.then(function(){
+				cb();
+			})
+			// Create the cordova project
+			.catch(function (err) {
+				cb(new gutil.PluginError('gulp-cordova-create', err.message));
 			});
 		}
 	});
