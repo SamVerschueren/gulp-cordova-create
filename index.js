@@ -13,7 +13,7 @@ var fs = require('fs');
 var mkdirp = require('mkdirp');
 var through = require('through2');
 var gutil = require('gulp-util');
-var cordova = require('cordova-lib').cordova.raw;
+var create = require('cordova-create');
 
 module.exports = function (options) {
 	var firstFile;
@@ -34,12 +34,12 @@ module.exports = function (options) {
 
 			var self = this;
 			var dir = options.dir || '.cordova';
-			var config = {lib: {www: {url: firstFile.path}}};
+			var config = {lib: {www: {url: firstFile.path, template: true}}};
 
 			// Make sure the directory exists
 			mkdirp(dir, function () {
 				// Create the cordova project in the correct directory
-				cordova.create(dir, options.id, options.name, config).then(function () {
+				create(dir, options.id, options.name, config).then(function () {
 					// Pass in the cordova project directory to the next step
 					self.push(new gutil.File({
 						base: firstFile.cwd,
