@@ -4,7 +4,7 @@ var fs = require('fs');
 var mkdirp = require('mkdirp');
 var through = require('through2');
 var gutil = require('gulp-util');
-var cordova = require('cordova-lib').cordova.raw;
+var cordova = require('cordova-lib').cordova;
 
 module.exports = function (options) {
 	var firstFile;

@@ -21,12 +21,12 @@
 		"gulp-cordova"
 	],
 	"dependencies": {
-		"cordova-lib": "6.2.0",
-		"gulp-util": "^3.0.4",
-		"mkdirp": "^0.5.0",
-		"through2": "^2.0.0"
+		"cordova-lib": "^8.1.0",
+		"gulp-util": "^3.0.8",
+		"mkdirp": "^0.5.1",
+		"through2": "^2.0.3"
 	},
 	"devDependencies": {
-		"xo": "*"
+		"xo": "^0.23.0"
 	}
 }
