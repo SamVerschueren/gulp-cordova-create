@@ -9,9 +9,15 @@
 		"email": "sam.verschueren@gmail.com"
 	},
 	"main": "index.js",
+	"engines": {
+		"node": ">=6"
+	},
 	"scripts": {
 		"test": "xo"
 	},
+	"files": [
+		"index.js"
+	],
 	"keywords": [
 		"gulp",
 		"gulpjs",

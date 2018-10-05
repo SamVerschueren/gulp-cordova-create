@@ -1,15 +1,15 @@
 'use strict';
-var path = require('path');
-var fs = require('fs');
-var mkdirp = require('mkdirp');
-var through = require('through2');
-var gutil = require('gulp-util');
-var cordova = require('cordova-lib').cordova;
+const path = require('path');
+const fs = require('fs');
+const mkdirp = require('mkdirp');
+const through = require('through2');
+const gutil = require('gulp-util');
+const {cordova} = require('cordova-lib');
 
-module.exports = function (options) {
-	var firstFile;
+module.exports = options => {
+	let firstFile;
 
-	return through.obj(function (file, enc, cb) {
+	return through.obj((file, enc, cb) => {
 		if (!file.isDirectory()) {
 			// Quit if the file provided is not a directory. In the future we can maybe
 			// store all the files in a temporary directory and pass the temporary directory
@@ -23,28 +23,26 @@ module.exports = function (options) {
 
 			options = options || {};
 
-			var self = this;
-			var dir = options.dir || '.cordova';
-			var config = {lib: {www: {url: firstFile.path}}};
+			const dir = options.dir || '.cordova';
+			const config = {lib: {www: {url: firstFile.path}}};
 
 			// Make sure the directory exists
-			mkdirp(dir, function () {
-				// Create the cordova project in the correct directory
-				cordova.create(dir, options.id, options.name, config).then(function () {
-					// Pass in the cordova project directory to the next step
-					self.push(new gutil.File({
+			mkdirp.sync(dir);
+
+			// Create the cordova project in the correct directory
+			cordova.create(dir, options.id, options.name, config)
+				.then(() => {
+					// Continue
+					cb(undefined, new gutil.File({
 						base: firstFile.cwd,
 						cwd: firstFile.cwd,
 						path: path.join(firstFile.cwd, dir),
 						stat: fs.statSync(path.join(firstFile.cwd, dir))
 					}));
-
-					// Continue
-					cb();
-				}).catch(function (err) {
-					cb(new gutil.PluginError('gulp-cordova-create', err.message));
+				})
+				.catch(error => {
+					cb(new gutil.PluginError('gulp-cordova-create', error.message));
 				});
-			});
 		}
 	});
 };
