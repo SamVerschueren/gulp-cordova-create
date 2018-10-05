@@ -1,6 +1,6 @@
 {
 	"name": "gulp-cordova-create",
-	"version": "1.3.1",
+	"version": "2.0.0",
 	"description": "Create a cordova project",
 	"license": "MIT",
 	"repository": "SamVerschueren/gulp-cordova-create",
