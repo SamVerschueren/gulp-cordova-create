@@ -1,13 +1,4 @@
 'use strict';
-
-/**
- * Creates a new cordova project in the current directory.
- *
- * @author Sam Verschueren	  <sam.verschueren@gmail.com>
- * @since  18 April 2015
- */
-
-// module dependencies
 var path = require('path');
 var fs = require('fs');
 var mkdirp = require('mkdirp');
