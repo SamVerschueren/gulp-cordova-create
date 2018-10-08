@@ -24,7 +24,15 @@ module.exports = options => {
 			options = options || {};
 
 			const dir = options.dir || '.cordova';
-			const config = {lib: {www: {url: firstFile.path}}};
+
+			const config = {
+				lib: {
+					www: {
+						template: true,
+						url: firstFile.path
+					}
+				}
+			};
 
 			// Make sure the directory exists
 			mkdirp.sync(dir);

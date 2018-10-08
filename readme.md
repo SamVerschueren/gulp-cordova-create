@@ -16,13 +16,15 @@ npm install --save-dev gulp-cordova-create
 const create = require('gulp-cordova-create');
 
 gulp.task('build', () => {
-    return gulp.src('dist')
+    return gulp.src('www')
         .pipe(create());
 });
 ```
 
-This will generate a Cordova project in the `.cordova` directory. It will copy the contents of the `dist` directory
-to the `www` directory of the cordova project.
+This will generate a Cordova project in the `.cordova` directory. It will copy the contents of the `www` directory
+to the root directory of the Cordova project.
+
+Make sure you html files are located in a directory called `www`.
 
 ### Options
 
@@ -38,7 +40,7 @@ gulp.task('build', () => {
         name: 'MyProject'
     };
 
-    return gulp.src('dist')
+    return gulp.src('www')
         .pipe(create(options));
 });
 ```
@@ -49,7 +51,7 @@ This will execute the following command
 $ cordova create myproject com.myproject.hello MyProject
 ```
 
-And then it will copy the content of the `dist` directory to the `www` directory of the cordova project.
+And then it will copy the content of the `www` directory to the `www` directory of the cordova project.
 
 
 ## API
